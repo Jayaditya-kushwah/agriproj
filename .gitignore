@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+report.xml
+.mypy_cache/
+.ruff_cache/
+
+# Secrets
+.secrets.baseline
+*.pem
+*.key
+
+# AgriDoc runtime data
+*.db
+uploads/
+~/.agridoc/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# Pre-commit
+.pre-commit-cache/
+
+# uv
+.uv/
+uv.lock

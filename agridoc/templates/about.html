@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}{{ t.page_about_title }} — {{ t.app_name }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title"><i class="fas fa-info-circle"></i> {{ t.page_about_title }}</h1>
+    <p class="page-sub">Farm Document Digitizer — Built for Telangana Farmers</p>
+  </div>
+</div>
+
+<div class="about-grid">
+
+  <!-- Mission -->
+  <div class="about-card">
+    <div class="about-icon" style="background:var(--green-light); color:var(--green)">
+      <i class="fas fa-bullseye"></i>
+    </div>
+    <h2>{{ t.about_mission_title }}</h2>
+    <p>{{ t.about_mission_te }}</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="about-card">
+    <div class="about-icon" style="background:#fff3e0; color:#e65100">
+      <i class="fas fa-chart-bar"></i>
+    </div>
+    <h2>{{ t.about_impact_title }}</h2>
+    <ul class="about-list">
+      <li><i class="fas fa-users" style="color:var(--green)"></i> <strong>110M+</strong> Indian farm households</li>
+      <li><i class="fas fa-map-marked-alt" style="color:var(--green)"></i> <strong>5.8M</strong> Telangana farmer families</li>
+      <li><i class="fas fa-file-alt" style="color:var(--green)"></i> <strong>10</strong> document types supported</li>
+      <li><i class="fas fa-language" style="color:var(--green)"></i> <strong>3</strong> {{ t.label_language_pref }} — తెలుగు, हिंदी, English</li>
+      <li><i class="fas fa-wifi-slash" style="color:var(--green)"></i> <strong>100%</strong> offline-capable</li>
+    </ul>
+  </div>
+
+  <!-- Tech -->
+  <div class="about-card">
+    <div class="about-icon" style="background:#e8f5e9; color:#388e3c">
+      <i class="fas fa-code"></i>
+    </div>
+    <h2>{{ t.about_tech_title }}</h2>
+    <ul class="about-list">
+      <li><i class="fas fa-server" style="color:var(--green)"></i> Flask 3.0 (Python)</li>
+      <li><i class="fas fa-database" style="color:var(--green)"></i> SQLite — Zero-config database</li>
+      <li><i class="fas fa-mobile-alt" style="color:var(--green)"></i> PWA — Progressive Web App</li>
+      <li><i class="fas fa-wifi-slash" style="color:var(--green)"></i> Service Worker — Offline support</li>
+      <li><i class="fas fa-font" style="color:var(--green)"></i> Noto Sans Telugu + Devanagari fonts</li>
+    </ul>
+  </div>
+
+  <!-- Team -->
+  <div class="about-card">
+    <div class="about-icon" style="background:#e3f2fd; color:#1565c0">
+      <i class="fas fa-heart"></i>
+    </div>
+    <h2>{{ t.about_built_title }}</h2>
+    <p>
+      <strong>Swecha Summer Internship 2024</strong><br>
+      {{ t.about_built_desc }}
+    </p>
+    <div class="about-tags">
+      <span class="about-tag">Swecha Telangana</span>
+      <span class="about-tag">AgriStack Aligned</span>
+      <span class="about-tag">AGPLv3</span>
+      <span class="about-tag">Open Source</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- AgriStack Banner -->
+<div class="agristack-banner">
+  <div class="agristack-content">
+    <i class="fas fa-link"></i>
+    <div>
+      <h3>AgriStack Alignment</h3>
+      <p>AgriDoc's document taxonomy and sync API are designed to integrate with India's AgriStack
+      federated farmer database — enabling future Farmer ID linking and government scheme verification.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+.about-card { background: var(--white); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); }
+.about-icon { width: 52px; height: 52px; border-radius: 12px; display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 1rem; }
+.about-card h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: .75rem; color: var(--gray-800); }
+.about-card p { font-size: .9rem; color: var(--gray-600); line-height: 1.65; }
+.about-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+.about-list li { display: flex; align-items: center; gap: .65rem; font-size: .9rem; }
+.about-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.about-tag { background: var(--green-light); color: var(--green-dark); padding: .25rem .75rem; border-radius: 100px; font-size: .78rem; font-weight: 500; }
+.agristack-banner { background: linear-gradient(135deg, var(--green-dark), var(--green)); border-radius: var(--radius-lg); padding: 1.75rem 2rem; color: #fff; }
+.agristack-content { display: flex; gap: 1.25rem; align-items: flex-start; }
+.agristack-content i { font-size: 1.75rem; opacity: .8; flex-shrink: 0; margin-top: .2rem; }
+.agristack-content h3 { font-size: 1rem; font-weight: 600; margin-bottom: .4rem; }
+.agristack-content p { font-size: .88rem; opacity: .85; line-height: 1.6; }
+</style>
+
+{% endblock %}

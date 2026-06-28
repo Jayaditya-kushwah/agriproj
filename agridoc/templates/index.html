@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block title %}{{ t.app_name }} — {{ t.app_tagline }}{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge"><i class="fas fa-leaf"></i> {{ t.hero_badge }}</div>
+      <h1 class="hero-title">
+        {{ t.app_tagline }}
+        <span class="hero-subtitle">Farm Document Digitizer</span>
+      </h1>
+      <p class="hero-desc">{{ t.hero_desc }}</p>
+      <div class="hero-actions">
+        <a href="/documents/upload" class="btn btn-primary btn-large">
+          <i class="fas fa-plus-circle"></i> {{ t.btn_add_document }}
+        </a>
+        <a href="/documents" class="btn btn-outline btn-large">
+          <i class="fas fa-search"></i> {{ t.btn_view_documents }}
+        </a>
+      </div>
+    </div>
+    <div class="hero-illustration">
+      <div class="hero-card-stack">
+        <div class="doc-card-preview card-1"><i class="fas fa-id-card"></i><span>Aadhaar</span></div>
+        <div class="doc-card-preview card-2"><i class="fas fa-landmark"></i><span>Pattadar</span></div>
+        <div class="doc-card-preview card-3"><i class="fas fa-tractor"></i><span>Rythu Bandhu</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Cards -->
+<section class="stats-section">
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:var(--green-light)"><i class="fas fa-file-alt" style="color:var(--green)"></i></div>
+      <div class="stat-info">
+        <div class="stat-number" id="statDocs">—</div>
+        <div class="stat-label">{{ t.stat_documents }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#fff3e0"><i class="fas fa-users" style="color:#e65100"></i></div>
+      <div class="stat-info">
+        <div class="stat-number" id="statFarmers">—</div>
+        <div class="stat-label">{{ t.stat_farmers }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#e8f5e9"><i class="fas fa-check-shield" style="color:#388e3c"></i></div>
+      <div class="stat-info">
+        <div class="stat-number" id="statVerified">—</div>
+        <div class="stat-label">{{ t.stat_verified }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#e3f2fd"><i class="fas fa-cloud-upload-alt" style="color:#1565c0"></i></div>
+      <div class="stat-info">
+        <div class="stat-number" id="statSync">—</div>
+        <div class="stat-label">{{ t.stat_pending_sync }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Document Categories -->
+<section class="categories-section">
+  <h2 class="section-title"><i class="fas fa-th-large"></i> {{ t.section_categories }}</h2>
+  <div class="categories-grid">
+    <a href="/documents?type=pattadar" class="cat-card cat-land">
+      <i class="fas fa-map-marked-alt"></i>
+      <span class="cat-name">{{ t.cat_pattadar }}</span>
+      <span class="cat-sub">Land Records</span>
+    </a>
+    <a href="/documents?type=adangal" class="cat-card cat-land">
+      <i class="fas fa-file-invoice"></i>
+      <span class="cat-name">{{ t.cat_adangal }}</span>
+      <span class="cat-sub">Rights of Record</span>
+    </a>
+    <a href="/documents?type=rytu_bandhu" class="cat-card cat-scheme">
+      <i class="fas fa-hand-holding-usd"></i>
+      <span class="cat-name">{{ t.cat_rytu_bandhu }}</span>
+      <span class="cat-sub">Investment Support</span>
+    </a>
+    <a href="/documents?type=pm_kisan" class="cat-card cat-scheme">
+      <i class="fas fa-tractor"></i>
+      <span class="cat-name">{{ t.cat_pm_kisan }}</span>
+      <span class="cat-sub">PM-KISAN Scheme</span>
+    </a>
+    <a href="/documents?type=crop_ins" class="cat-card cat-insurance">
+      <i class="fas fa-umbrella"></i>
+      <span class="cat-name">{{ t.cat_crop_ins }}</span>
+      <span class="cat-sub">Crop Insurance</span>
+    </a>
+    <a href="/documents?type=aadhaar" class="cat-card cat-identity">
+      <i class="fas fa-id-card"></i>
+      <span class="cat-name">{{ t.cat_aadhaar }}</span>
+      <span class="cat-sub">Identity</span>
+    </a>
+    <a href="/documents?type=bank_pass" class="cat-card cat-finance">
+      <i class="fas fa-university"></i>
+      <span class="cat-name">{{ t.cat_bank_pass }}</span>
+      <span class="cat-sub">Banking</span>
+    </a>
+    <a href="/documents?type=soil" class="cat-card cat-agri">
+      <i class="fas fa-flask"></i>
+      <span class="cat-name">{{ t.cat_soil }}</span>
+      <span class="cat-sub">Soil Health Card</span>
+    </a>
+  </div>
+</section>
+
+<!-- Quick Tips -->
+<section class="tips-section">
+  <h2 class="section-title"><i class="fas fa-lightbulb"></i> {{ t.section_tips }}</h2>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon"><i class="fas fa-wifi-slash"></i></div>
+      <h3>{{ t.tip_offline_title }}</h3>
+      <p>{{ t.tip_offline_desc }}</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h3>{{ t.tip_mobile_title }}</h3>
+      <p>{{ t.tip_mobile_desc }}</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon"><i class="fas fa-lock"></i></div>
+      <h3>{{ t.tip_secure_title }}</h3>
+      <p>{{ t.tip_secure_desc }}</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+fetch('/api/stats').then(r=>r.json()).then(d=>{
+  document.getElementById('statDocs').textContent = d.total_documents;
+  document.getElementById('statFarmers').textContent = d.total_farmers;
+  document.getElementById('statVerified').textContent = d.verified_documents;
+  document.getElementById('statSync').textContent = d.pending_sync;
+}).catch(()=>{});
+</script>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}{{ farmer.name }} — {{ t.app_name }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title">
+      <div class="farmer-avatar-lg">{{ farmer.name[0] | upper }}</div>
+      {{ farmer.name }}
+    </h1>
+    <p class="page-sub">{{ t.farmer_profile_sub }}</p>
+  </div>
+  <div style="display:flex;gap:.75rem">
+    <a href="/documents/upload?farmer_id={{ farmer.id }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{ t.btn_add_document_farmer }}</a>
+    <a href="/farmers" class="btn btn-outline"><i class="fas fa-arrow-left"></i> {{ t.btn_back }}</a>
+  </div>
+</div>
+
+<div class="doc-view-grid">
+  <!-- Farmer Details -->
+  <div class="doc-view-card">
+    <h2 style="margin-bottom:1.25rem;font-size:1.1rem;color:var(--green-dark)">
+      <i class="fas fa-user"></i> {{ t.section_personal_details }}
+    </h2>
+    <div class="detail-grid">
+      {% if farmer.phone %}
+      <div class="detail-item">
+        <span class="detail-label"><i class="fas fa-phone"></i> {{ t.label_phone_short }}</span>
+        <span class="detail-value">{{ farmer.phone }}</span>
+      </div>
+      {% endif %}
+      {% if farmer.village %}
+      <div class="detail-item">
+        <span class="detail-label"><i class="fas fa-map-pin"></i> {{ t.label_village_short }}</span>
+        <span class="detail-value">{{ farmer.village }}</span>
+      </div>
+      {% endif %}
+      {% if farmer.mandal %}
+      <div class="detail-item">
+        <span class="detail-label"><i class="fas fa-map"></i> {{ t.label_mandal_short }}</span>
+        <span class="detail-value">{{ farmer.mandal }}</span>
+      </div>
+      {% endif %}
+      <div class="detail-item">
+        <span class="detail-label"><i class="fas fa-location-dot"></i> {{ t.label_district_short }}</span>
+        <span class="detail-value">{{ farmer.district or 'Hyderabad' }}, {{ farmer.state or 'Telangana' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label"><i class="fas fa-language"></i> {{ t.label_language_short }}</span>
+        <span class="detail-value">{{ {'te': 'తెలుగు', 'hi': 'हिंदी', 'en': 'English'}.get(farmer.language, farmer.language) }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label"><i class="fas fa-calendar"></i> {{ t.label_registered_date }}</span>
+        <span class="detail-value">{{ farmer.created_at[:10] if farmer.created_at else '—' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Documents -->
+  <div class="doc-view-card">
+    <h2 style="margin-bottom:1.25rem;font-size:1.1rem;color:var(--green-dark)">
+      <i class="fas fa-folder-open"></i> {{ t.page_documents_title }} ({{ docs | length }})
+    </h2>
+    {% if docs %}
+    <div style="display:flex;flex-direction:column;gap:.75rem;">
+      {% for doc in docs %}
+      <div style="display:flex;align-items:center;gap:.85rem;padding:.85rem;background:var(--gray-50);border-radius:var(--radius-sm);border:1px solid var(--gray-200)">
+        <div style="width:38px;height:38px;background:var(--green-light);border-radius:8px;display:grid;place-items:center;color:var(--green);font-size:1rem;flex-shrink:0">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:600;font-size:.92rem">{{ doc.title }}</div>
+          <div style="font-size:.78rem;color:var(--gray-600)">{{ doc.name_te or doc.doc_type }} · {{ doc.created_at[:10] if doc.created_at else '' }}</div>
+        </div>
+        <a href="/documents/{{ doc.id }}" class="btn btn-sm btn-outline"><i class="fas fa-eye"></i></a>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state" style="padding:2rem">
+      <i class="fas fa-file-slash"></i>
+      <p>{{ t.no_docs_yet }}</p>
+      <a href="/documents/upload?farmer_id={{ farmer.id }}" class="btn btn-primary">{{ t.btn_add_document_farmer }}</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+.farmer-avatar-lg {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  display: inline-grid; place-items: center;
+  font-size: 1.2rem; font-weight: 700;
+  margin-right: .6rem; vertical-align: middle;
+}
+</style>
+
+{% endblock %}

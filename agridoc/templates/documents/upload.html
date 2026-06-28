@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}{{ t.page_upload_title }} — {{ t.app_name }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title"><i class="fas fa-cloud-upload-alt"></i> {{ t.page_upload_title }}</h1>
+    <p class="page-sub">{{ t.page_upload_sub }}</p>
+  </div>
+  <a href="/documents" class="btn btn-outline"><i class="fas fa-arrow-left"></i> {{ t.btn_back }}</a>
+</div>
+
+<div class="form-container">
+  <form method="post" enctype="multipart/form-data" class="upload-form">
+
+    <!-- Drop Zone -->
+    <div class="drop-zone" id="dropZone">
+      <div class="drop-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+      <p class="drop-title">{{ t.drop_zone_title }}</p>
+      <p class="drop-sub">{{ t.drop_zone_sub }}</p>
+      <input type="file" name="document_file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.webp" class="file-input">
+    </div>
+    <div id="filePreview" class="file-preview" style="display:none">
+      <i class="fas fa-file-check"></i>
+      <span id="fileName"></span>
+      <button type="button" onclick="clearFile()" class="clear-file">×</button>
+    </div>
+
+    <!-- Form Fields -->
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label required">{{ t.label_doc_title }}</label>
+        <input type="text" name="title" required placeholder="{{ t.placeholder_doc_title }}" class="form-input">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label required">{{ t.label_doc_type }}</label>
+        <select name="doc_type" required class="form-select">
+          <option value="">{{ t.placeholder_doc_type }}</option>
+          {% set ns = namespace(cat='') %}
+          {% for dt in doc_types %}
+          {% if dt.category != ns.cat %}
+          {% set ns.cat = dt.category %}
+          <optgroup label="{{ dt.category|upper }}">
+          {% endif %}
+          <option value="{{ dt.code }}">{{ dt.name_te }} — {{ dt.name_en }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">{{ t.label_farmer_select }}</label>
+        <select name="farmer_id" class="form-select">
+          <option value="">{{ t.placeholder_farmer_select }}</option>
+          {% for f in farmers %}
+          <option value="{{ f.id }}" {% if request.args.get('farmer_id')|string == f.id|string %}selected{% endif %}>{{ f.name }}{% if f.village %} — {{ f.village }}{% endif %}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">{{ t.label_language }}</label>
+        <div class="lang-toggle">
+          <label class="lang-opt"><input type="radio" name="language" value="te" {% if lang == 'te' %}checked{% endif %}> తెలుగు</label>
+          <label class="lang-opt"><input type="radio" name="language" value="hi" {% if lang == 'hi' %}checked{% endif %}> हिंदी</label>
+          <label class="lang-opt"><input type="radio" name="language" value="en" {% if lang == 'en' %}checked{% endif %}> English</label>
+        </div>
+      </div>
+
+      <div class="form-group form-full">
+        <label class="form-label">{{ t.label_notes }}</label>
+        <textarea name="notes" rows="3" placeholder="{{ t.placeholder_notes }}" class="form-textarea"></textarea>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn-large">
+        <i class="fas fa-save"></i> {{ t.btn_save_document }}
+      </button>
+      <a href="/documents" class="btn btn-outline">{{ t.btn_cancel }}</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+const dz = document.getElementById('dropZone');
+const fi = document.getElementById('fileInput');
+
+dz.addEventListener('click', () => fi.click());
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => {
+  e.preventDefault(); dz.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if (f) { fi.files = e.dataTransfer.files; showPreview(f); }
+});
+fi.addEventListener('change', e => { if (e.target.files[0]) showPreview(e.target.files[0]); });
+
+function showPreview(f) {
+  document.getElementById('filePreview').style.display = 'flex';
+  document.getElementById('fileName').textContent = f.name + ' (' + (f.size/1024).toFixed(1) + ' KB)';
+  dz.style.display = 'none';
+}
+function clearFile() {
+  fi.value = '';
+  document.getElementById('filePreview').style.display = 'none';
+  dz.style.display = 'flex';
+}
+</script>
+{% endblock %}

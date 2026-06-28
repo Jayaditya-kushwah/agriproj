@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}{{ t.page_documents_title }} — {{ t.app_name }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title"><i class="fas fa-folder-open"></i> {{ t.page_documents_title }}</h1>
+    <p class="page-sub">{{ t.page_documents_sub }}</p>
+  </div>
+  <a href="/documents/upload" class="btn btn-primary"><i class="fas fa-plus"></i> {{ t.btn_add_new }}</a>
+</div>
+
+<!-- Search & Filter -->
+<div class="search-bar">
+  <form method="get" class="search-form">
+    <div class="search-input-wrap">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" name="q" value="{{ query }}" placeholder="{{ t.search_docs_placeholder }}" class="search-input" autocomplete="off">
+    </div>
+    <select name="type" class="filter-select">
+      <option value="">{{ t.filter_all_types }}</option>
+      {% for dt in doc_types %}
+      <option value="{{ dt.code }}" {% if request.args.get('type')==dt.code %}selected{% endif %}>{{ dt.name_te }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">{{ t.btn_search }}</button>
+  </form>
+</div>
+
+<!-- Documents Grid -->
+{% if docs %}
+<div class="docs-grid">
+  {% for doc in docs %}
+  <div class="doc-card">
+    <div class="doc-card-header doc-type-{{ doc.doc_type }}">
+      <div class="doc-type-icon">
+        {% if doc.doc_type in ['pattadar', 'adangal'] %}<i class="fas fa-map-marked-alt"></i>
+        {% elif doc.doc_type in ['pm_kisan', 'rytu_bandhu'] %}<i class="fas fa-hand-holding-usd"></i>
+        {% elif doc.doc_type == 'aadhaar' %}<i class="fas fa-id-card"></i>
+        {% elif doc.doc_type == 'crop_ins' %}<i class="fas fa-umbrella"></i>
+        {% elif doc.doc_type in ['bank_pass', 'loan'] %}<i class="fas fa-university"></i>
+        {% elif doc.doc_type == 'soil' %}<i class="fas fa-flask"></i>
+        {% else %}<i class="fas fa-file-alt"></i>{% endif %}
+      </div>
+      {% if doc.is_verified %}
+      <span class="verified-badge"><i class="fas fa-check"></i></span>
+      {% endif %}
+    </div>
+    <div class="doc-card-body">
+      <h3 class="doc-title">{{ doc.title }}</h3>
+      <div class="doc-meta">
+        <span class="doc-type-tag">{{ doc.name_te or doc.doc_type }}</span>
+        {% if doc.farmer_name %}
+        <span class="doc-farmer"><i class="fas fa-user"></i> {{ doc.farmer_name }}</span>
+        {% endif %}
+      </div>
+      {% if doc.notes %}
+      <p class="doc-notes">{{ doc.notes[:80] }}{% if doc.notes|length > 80 %}...{% endif %}</p>
+      {% endif %}
+      <div class="doc-date">
+        <i class="fas fa-calendar-alt"></i>
+        {{ doc.created_at[:10] if doc.created_at else '—' }}
+      </div>
+    </div>
+    <div class="doc-card-footer">
+      <a href="/documents/{{ doc.id }}" class="btn btn-sm btn-outline"><i class="fas fa-eye"></i> {{ t.btn_view }}</a>
+      <form method="post" action="/documents/{{ doc.id }}/delete" onsubmit="return confirm('{{ t.confirm_delete_doc }}')">
+        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <i class="fas fa-folder-open"></i>
+  <h3>{{ t.no_docs_title }}</h3>
+  <p>{{ t.no_docs_sub }}</p>
+  <a href="/documents/upload" class="btn btn-primary">{{ t.btn_upload_document }}</a>
+</div>
+{% endif %}
+
+{% endblock %}

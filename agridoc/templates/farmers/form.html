@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}{{ t.page_register_farmer_title }} — {{ t.app_name }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title"><i class="fas fa-user-plus"></i> {{ t.page_register_farmer_title }}</h1>
+    <p class="page-sub">{{ t.page_register_farmer_sub }}</p>
+  </div>
+  <a href="/farmers" class="btn btn-outline"><i class="fas fa-arrow-left"></i> {{ t.btn_back }}</a>
+</div>
+
+<div class="form-container">
+  <form method="post" class="upload-form">
+    <div class="form-grid">
+
+      <div class="form-group form-full">
+        <label class="form-label required">{{ t.label_farmer_name }}</label>
+        <input type="text" name="name" required placeholder="{{ t.placeholder_farmer_name }}" class="form-input">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">{{ t.label_phone }}</label>
+        <input type="tel" name="phone" placeholder="9876543210" class="form-input" maxlength="10">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">{{ t.label_village }}</label>
+        <input type="text" name="village" placeholder="{{ t.placeholder_village }}" class="form-input" style="font-family:var(--font-telugu)">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">{{ t.label_mandal }}</label>
+        <input type="text" name="mandal" placeholder="{{ t.placeholder_mandal }}" class="form-input" style="font-family:var(--font-telugu)">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">{{ t.label_district }}</label>
+        <select name="district" class="form-select">
+          <option value="Hyderabad">Hyderabad</option>
+          <option value="Warangal">Warangal</option>
+          <option value="Karimnagar">Karimnagar</option>
+          <option value="Nizamabad">Nizamabad</option>
+          <option value="Khammam">Khammam</option>
+          <option value="Nalgonda">Nalgonda</option>
+          <option value="Mahbubnagar">Mahbubnagar</option>
+          <option value="Rangareddy">Rangareddy</option>
+          <option value="Medak">Medak</option>
+          <option value="Adilabad">Adilabad</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">{{ t.label_language_pref }}</label>
+        <div class="lang-toggle">
+          <label class="lang-opt"><input type="radio" name="language" value="te" {% if lang == 'te' %}checked{% endif %}> తెలుగు</label>
+          <label class="lang-opt"><input type="radio" name="language" value="hi" {% if lang == 'hi' %}checked{% endif %}> हिंदी</label>
+          <label class="lang-opt"><input type="radio" name="language" value="en" {% if lang == 'en' %}checked{% endif %}> English</label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn-large">
+        <i class="fas fa-user-check"></i> {{ t.btn_register_farmer }}
+      </button>
+      <a href="/farmers" class="btn btn-outline">{{ t.btn_cancel }}</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

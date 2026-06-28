@@ -1,0 +1,74 @@
+image: python:3.11-slim
+
+stages:
+  - test
+  - lint
+  - format
+  - type_check
+  - coverage
+  - security
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+  PYTHONPATH: "."
+
+cache:
+  paths:
+    - .pip-cache/
+    - .venv/
+
+before_script:
+  - pip install --upgrade pip uv --quiet
+  - uv pip install --system -e ".[dev]" --quiet 2>/dev/null || pip install -e ".[dev]" --quiet
+
+# ── Test ─────────────────────────────────────────────────────
+test:
+  stage: test
+  script:
+    - pytest tests/ -v --tb=short
+  artifacts:
+    reports:
+      junit: report.xml
+    when: always
+
+# ── Coverage ─────────────────────────────────────────────────
+coverage:
+  stage: coverage
+  script:
+    - pytest --cov=agridoc --cov-report=term-missing --cov-report=xml --cov-fail-under=70
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+
+# ── Lint ─────────────────────────────────────────────────────
+lint:
+  stage: lint
+  script:
+    - ruff check agridoc/ tests/
+    - flake8 agridoc/ tests/ --max-line-length=100 --extend-ignore=E501
+    - pylint agridoc/ --fail-under=7.0
+    - vulture agridoc/ --min-confidence=80
+    - pyupgrade --py310-plus agridoc/**/*.py
+
+# ── Format ───────────────────────────────────────────────────
+format:
+  stage: format
+  script:
+    - ruff format --check agridoc/ tests/
+
+# ── Type Check ───────────────────────────────────────────────
+type_check:
+  stage: type_check
+  script:
+    - mypy agridoc/ --ignore-missing-imports
+
+# ── Security ─────────────────────────────────────────────────
+security:
+  stage: security
+  script:
+    - bandit -r agridoc/ -c pyproject.toml -ll
+    - pip-audit --desc || true
+  allow_failure: false

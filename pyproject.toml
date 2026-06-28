@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "agridoc"
+version = "1.0.0"
+description = "AgriDoc — Farm Document Digitizer for India's Farmers"
+readme = "README.md"
+license = { text = "AGPL-3.0-or-later" }
+authors = [{ name = "AgriDoc Contributors" }]
+requires-python = ">=3.10"
+keywords = ["agriculture", "telangana", "farmers", "digitization", "agristack", "offline", "ocr", "cpu"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "Topic :: Other/Nonlisted Topic",
+]
+dependencies = [
+  "flask>=3.0",
+  "werkzeug>=3.0",
+  # CPU-first OCR — no GPU, no cloud, works fully offline
+  # Requires system package: sudo apt install tesseract-ocr tesseract-ocr-tel tesseract-ocr-hin
+  "pytesseract>=0.3.10",
+  "Pillow>=10.0",
+  "gunicorn>=22.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "ruff>=0.4",
+  "mypy>=1.9",
+  "flake8>=7.0",
+  "pylint>=3.0",
+  "vulture>=2.11",
+  "bandit[toml]>=1.7",
+  "pyupgrade>=3.15",
+  "semgrep>=1.70",
+  "detect-secrets>=1.4",
+  "pip-audit>=2.7",
+  "pre-commit>=3.7",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
+explicit_package_bases = true
+
+[tool.pylint.messages_control]
+disable = ["C0114", "C0115", "C0116", "R0903"]
+max-line-length = 100
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
+skips = ["B101"]
+
+[tool.vulture]
+min_confidence = 80
+paths = ["agridoc"]
+
+[tool.coverage.run]
+source = ["agridoc"]
+omit = ["tests/*", "run.py"]
+
+[tool.coverage.report]
+fail_under = 70
+show_missing = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=agridoc --cov-report=term-missing --cov-fail-under=70"
