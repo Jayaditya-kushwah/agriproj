@@ -43,7 +43,7 @@
           {% set ns.cat = dt.category %}
           <optgroup label="{{ dt.category|upper }}">
           {% endif %}
-          <option value="{{ dt.code }}">{{ dt.name_te }} — {{ dt.name_en }}</option>
+          <option value="{{ dt.code }}">{{ dt.name_en if lang == 'en' else dt.name_hi if lang == 'hi' else dt.name_te }} — {{ dt.name_en }}</option>
           {% endfor %}
         </select>
       </div>

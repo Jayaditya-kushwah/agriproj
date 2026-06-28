@@ -76,7 +76,7 @@ def view_farmer(farmer_id: int) -> Any:
         flash("రైతు కనుగొనబడలేదు | Farmer not found.", "error")
         return redirect(url_for("farmers.list_farmers"))
     docs = conn.execute(
-        """SELECT d.*, dt.name_te, dt.name_en FROM documents d
+        """SELECT d.*, dt.name_te, dt.name_hi, dt.name_en FROM documents d
            LEFT JOIN doc_types dt ON d.doc_type = dt.code
            WHERE d.farmer_id = ? ORDER BY d.created_at DESC""",
         (farmer_id,),

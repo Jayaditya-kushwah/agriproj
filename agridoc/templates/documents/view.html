@@ -5,7 +5,7 @@
 <div class="page-header">
   <div>
     <h1 class="page-title"><i class="fas fa-file-alt"></i> {{ doc.title }}</h1>
-    <p class="page-sub">{{ doc.name_te or doc.doc_type }}</p>
+    <p class="page-sub">{{ (doc.name_en if lang == 'en' else doc.name_hi if lang == 'hi' else doc.name_te) or doc.doc_type }}</p>
   </div>
   <a href="/documents" class="btn btn-outline"><i class="fas fa-arrow-left"></i> {{ t.btn_back }}</a>
 </div>
@@ -19,7 +19,7 @@
         </div>
         <div>
           <h2>{{ doc.title }}</h2>
-          <span class="doc-type-tag">{{ doc.name_te or doc.doc_type }}</span>
+          <span class="doc-type-tag">{{ (doc.name_en if lang == 'en' else doc.name_hi if lang == 'hi' else doc.name_te) or doc.doc_type }}</span>
           {% if doc.is_verified %}<span class="verified-badge-lg"><i class="fas fa-check-circle"></i> {{ t.verified_badge }}</span>{% endif %}
         </div>
       </div>

@@ -44,7 +44,7 @@ def list_documents() -> str:
 
     conn = _get_db()
     sql = """
-        SELECT d.*, f.name as farmer_name, dt.name_te, dt.name_en
+        SELECT d.*, f.name as farmer_name, dt.name_te, dt.name_hi, dt.name_en
         FROM documents d
         LEFT JOIN farmers f ON d.farmer_id = f.id
         LEFT JOIN doc_types dt ON d.doc_type = dt.code
@@ -150,7 +150,7 @@ def view_document(doc_id: int) -> Any:
     conn = _get_db()
     doc = conn.execute(
         """SELECT d.*, f.name as farmer_name, f.village, f.district,
-                  dt.name_te, dt.name_en, dt.category
+                  dt.name_te, dt.name_hi, dt.name_en, dt.category
            FROM documents d
            LEFT JOIN farmers f ON d.farmer_id = f.id
            LEFT JOIN doc_types dt ON d.doc_type = dt.code

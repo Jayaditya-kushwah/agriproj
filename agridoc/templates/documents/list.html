@@ -20,7 +20,7 @@
     <select name="type" class="filter-select">
       <option value="">{{ t.filter_all_types }}</option>
       {% for dt in doc_types %}
-      <option value="{{ dt.code }}" {% if request.args.get('type')==dt.code %}selected{% endif %}>{{ dt.name_te }}</option>
+      <option value="{{ dt.code }}" {% if request.args.get('type')==dt.code %}selected{% endif %}>{{ dt.name_en if lang == 'en' else dt.name_hi if lang == 'hi' else dt.name_te }}</option>
       {% endfor %}
     </select>
     <button type="submit" class="btn btn-primary">{{ t.btn_search }}</button>
@@ -49,7 +49,7 @@
     <div class="doc-card-body">
       <h3 class="doc-title">{{ doc.title }}</h3>
       <div class="doc-meta">
-        <span class="doc-type-tag">{{ doc.name_te or doc.doc_type }}</span>
+        <span class="doc-type-tag">{{ (doc.name_en if lang == 'en' else doc.name_hi if lang == 'hi' else doc.name_te) or doc.doc_type }}</span>
         {% if doc.farmer_name %}
         <span class="doc-farmer"><i class="fas fa-user"></i> {{ doc.farmer_name }}</span>
         {% endif %}
