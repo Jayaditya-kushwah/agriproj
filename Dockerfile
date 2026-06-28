@@ -24,9 +24,10 @@ WORKDIR /home/agridoc/app
 
 # Python dependencies
 COPY --chown=agridoc:agridoc pyproject.toml ./
-RUN pip install --no-cache-dir --user gunicorn && \
+RUN pip install --no-cache-dir --user --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir --user gunicorn && \
     pip install --no-cache-dir --user -e . 2>/dev/null || true
-
+    
 # Copy application
 COPY --chown=agridoc:agridoc . .
 RUN pip install --no-cache-dir --user -e .
