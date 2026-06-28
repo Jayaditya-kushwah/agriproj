@@ -26,6 +26,10 @@ dependencies = [
   "gunicorn>=22.0",
 ]
 
+[tool.setuptools.packages.find]
+include = ["agridoc*"]
+
+
 [project.optional-dependencies]
 dev = [
   "pytest>=8.0",
