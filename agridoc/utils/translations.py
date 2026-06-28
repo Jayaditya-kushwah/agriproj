@@ -57,6 +57,11 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "hi": "अपने सभी कृषि दस्तावेज़ सुरक्षित रखें — ऑफ़लाइन भी काम करता है",
         "en": "Securely store all your farm documents — works offline too",
     },
+    "hero_subtitle": {
+        "te": "వ్యవసాయ పత్రాల డిజిటైజర్",
+        "hi": "कृषि दस्तावेज़ डिजिटाइज़र",
+        "en": "Farm Document Digitizer",
+    },
     "btn_add_document": {
         "te": "పత్రం జోడించండి",
         "hi": "दस्तावेज़ जोड़ें",
@@ -99,22 +104,47 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "hi": "पट्टादार पासबुक",
         "en": "Pattadar Passbook",
     },
+    "cat_sub_pattadar": {
+        "te": "భూ రికార్డులు",
+        "hi": "भूमि रिकॉर्ड",
+        "en": "Land Records",
+    },
     "cat_adangal": {
         "te": "అదంగల్ / RoR",
         "hi": "अदंगल / RoR",
         "en": "Adangal / RoR",
+    },
+    "cat_sub_adangal": {
+        "te": "రికార్డుల హక్కులు",
+        "hi": "अधिकारों का रिकॉर्ड",
+        "en": "Rights of Record",
     },
     "cat_rytu_bandhu": {
         "te": "రైతు బంధు",
         "hi": "रायतु बंधु",
         "en": "Rythu Bandhu",
     },
+    "cat_sub_rytu_bandhu": {
+        "te": "పెట్టుబడి మద్దతు",
+        "hi": "निवेश समर्थन",
+        "en": "Investment Support",
+    },
     "cat_pm_kisan": {
         "te": "పీఎం-కిసాన్",
         "hi": "पीएम-किसान",
         "en": "PM-KISAN",
     },
+    "cat_sub_pm_kisan": {
+        "te": "పీఎం-కిసాన్ పథకం",
+        "hi": "पीएम-किसान योजना",
+        "en": "PM-KISAN Scheme",
+    },
     "cat_crop_ins": {
+        "te": "పంట బీమా",
+        "hi": "फसल बीमा",
+        "en": "Crop Insurance",
+    },
+    "cat_sub_crop_ins": {
         "te": "పంట బీమా",
         "hi": "फसल बीमा",
         "en": "Crop Insurance",
@@ -124,12 +154,27 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "hi": "आधार कार्ड",
         "en": "Aadhaar Card",
     },
+    "cat_sub_aadhaar": {
+        "te": "గుర్తింపు",
+        "hi": "पहचान",
+        "en": "Identity",
+    },
     "cat_bank_pass": {
         "te": "బ్యాంక్ పాస్‌బుక్",
         "hi": "बैंक पासबुक",
         "en": "Bank Passbook",
     },
+    "cat_sub_bank_pass": {
+        "te": "బ్యాంకింగ్",
+        "hi": "बैंकिंग",
+        "en": "Banking",
+    },
     "cat_soil": {
+        "te": "మట్టి ఆరోగ్య కార్డు",
+        "hi": "मिट्टी स्वास्थ्य कार्ड",
+        "en": "Soil Health Card",
+    },
+    "cat_sub_soil": {
         "te": "మట్టి ఆరోగ్య కార్డు",
         "hi": "मिट्टी स्वास्थ्य कार्ड",
         "en": "Soil Health Card",

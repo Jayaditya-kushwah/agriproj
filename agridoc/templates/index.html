@@ -9,7 +9,7 @@
       <div class="hero-badge"><i class="fas fa-leaf"></i> {{ t.hero_badge }}</div>
       <h1 class="hero-title">
         {{ t.app_tagline }}
-        <span class="hero-subtitle">Farm Document Digitizer</span>
+        <span class="hero-subtitle">{{ t.hero_subtitle }}</span>
       </h1>
       <p class="hero-desc">{{ t.hero_desc }}</p>
       <div class="hero-actions">
@@ -23,9 +23,9 @@
     </div>
     <div class="hero-illustration">
       <div class="hero-card-stack">
-        <div class="doc-card-preview card-1"><i class="fas fa-id-card"></i><span>Aadhaar</span></div>
-        <div class="doc-card-preview card-2"><i class="fas fa-landmark"></i><span>Pattadar</span></div>
-        <div class="doc-card-preview card-3"><i class="fas fa-tractor"></i><span>Rythu Bandhu</span></div>
+        <div class="doc-card-preview card-1"><i class="fas fa-id-card"></i><span>{{ t.cat_aadhaar }}</span></div>
+        <div class="doc-card-preview card-2"><i class="fas fa-landmark"></i><span>{{ t.cat_pattadar }}</span></div>
+        <div class="doc-card-preview card-3"><i class="fas fa-tractor"></i><span>{{ t.cat_rytu_bandhu }}</span></div>
       </div>
     </div>
   </div>
@@ -72,42 +72,42 @@
     <a href="/documents?type=pattadar" class="cat-card cat-land">
       <i class="fas fa-map-marked-alt"></i>
       <span class="cat-name">{{ t.cat_pattadar }}</span>
-      <span class="cat-sub">Land Records</span>
+      <span class="cat-sub">{{ t.cat_sub_pattadar }}</span>
     </a>
     <a href="/documents?type=adangal" class="cat-card cat-land">
       <i class="fas fa-file-invoice"></i>
       <span class="cat-name">{{ t.cat_adangal }}</span>
-      <span class="cat-sub">Rights of Record</span>
+      <span class="cat-sub">{{ t.cat_sub_adangal }}</span>
     </a>
     <a href="/documents?type=rytu_bandhu" class="cat-card cat-scheme">
       <i class="fas fa-hand-holding-usd"></i>
       <span class="cat-name">{{ t.cat_rytu_bandhu }}</span>
-      <span class="cat-sub">Investment Support</span>
+      <span class="cat-sub">{{ t.cat_sub_rytu_bandhu }}</span>
     </a>
     <a href="/documents?type=pm_kisan" class="cat-card cat-scheme">
       <i class="fas fa-tractor"></i>
       <span class="cat-name">{{ t.cat_pm_kisan }}</span>
-      <span class="cat-sub">PM-KISAN Scheme</span>
+      <span class="cat-sub">{{ t.cat_sub_pm_kisan }}</span>
     </a>
     <a href="/documents?type=crop_ins" class="cat-card cat-insurance">
       <i class="fas fa-umbrella"></i>
       <span class="cat-name">{{ t.cat_crop_ins }}</span>
-      <span class="cat-sub">Crop Insurance</span>
+      <span class="cat-sub">{{ t.cat_sub_crop_ins }}</span>
     </a>
     <a href="/documents?type=aadhaar" class="cat-card cat-identity">
       <i class="fas fa-id-card"></i>
       <span class="cat-name">{{ t.cat_aadhaar }}</span>
-      <span class="cat-sub">Identity</span>
+      <span class="cat-sub">{{ t.cat_sub_aadhaar }}</span>
     </a>
     <a href="/documents?type=bank_pass" class="cat-card cat-finance">
       <i class="fas fa-university"></i>
       <span class="cat-name">{{ t.cat_bank_pass }}</span>
-      <span class="cat-sub">Banking</span>
+      <span class="cat-sub">{{ t.cat_sub_bank_pass }}</span>
     </a>
     <a href="/documents?type=soil" class="cat-card cat-agri">
       <i class="fas fa-flask"></i>
       <span class="cat-name">{{ t.cat_soil }}</span>
-      <span class="cat-sub">Soil Health Card</span>
+      <span class="cat-sub">{{ t.cat_sub_soil }}</span>
     </a>
   </div>
 </section>
