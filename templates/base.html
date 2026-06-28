@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2d6a4f">
+  <meta name="description" content="{{ t.app_description }}">
+  <link rel="manifest" href="/static/manifest.json">
+  <title>{% block title %}{{ t.app_name }} — {{ t.app_tagline }}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@300;400;600;700&family=Noto+Sans+Devanagari:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/agridoc.css">
+  <style>
+    /* Language switcher */
+    .lang-switcher { display: flex; gap: .35rem; align-items: center; }
+    .lang-btn {
+      padding: .2rem .55rem; border-radius: 999px; border: 1.5px solid var(--gray-300);
+      font-size: .72rem; font-weight: 600; color: var(--gray-600);
+      background: transparent; cursor: pointer; text-decoration: none;
+      transition: background .15s, color .15s, border-color .15s;
+      line-height: 1.5;
+    }
+    .lang-btn:hover { background: var(--green-light); border-color: var(--green); color: var(--green-dark); }
+    .lang-btn.active { background: var(--green); border-color: var(--green); color: #fff; }
+    @media (max-width: 640px) { .lang-switcher { gap: .25rem; } .lang-btn { font-size: .68rem; padding: .18rem .42rem; } }
+  </style>
+</head>
+<body>
+
+<!-- Offline Banner -->
+<div id="offline-banner" class="offline-banner" style="display:none">
+  <i class="fas fa-wifi-slash"></i>
+  <span>{{ t.offline_msg }}</span>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a class="nav-brand" href="/">
+      <div class="brand-icon"><i class="fas fa-seedling"></i></div>
+      <div class="brand-text">
+        <span class="brand-name">{{ t.app_name }}</span>
+        <span class="brand-sub">{{ t.app_tagline }}</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/" class="{% if request.endpoint == 'main.index' %}active{% endif %}"><i class="fas fa-home"></i> <span>{{ t.nav_home }}</span></a></li>
+      <li><a href="/farmers" class="{% if 'farmers' in request.endpoint %}active{% endif %}"><i class="fas fa-users"></i> <span>{{ t.nav_farmers }}</span></a></li>
+      <li><a href="/documents" class="{% if 'documents' in request.endpoint %}active{% endif %}"><i class="fas fa-folder-open"></i> <span>{{ t.nav_documents }}</span></a></li>
+      <li><a href="/documents/upload" class="nav-upload"><i class="fas fa-plus-circle"></i> <span>{{ t.nav_upload }}</span></a></li>
+    </ul>
+    <div class="nav-status" style="display:flex;align-items:center;gap:.75rem;">
+      <!-- Language Switcher -->
+      <div class="lang-switcher">
+        <a href="/set-language/te" class="lang-btn {% if lang == 'te' %}active{% endif %}">తె</a>
+        <a href="/set-language/hi" class="lang-btn {% if lang == 'hi' %}active{% endif %}">हि</a>
+        <a href="/set-language/en" class="lang-btn {% if lang == 'en' %}active{% endif %}">En</a>
+      </div>
+      <span id="sync-indicator" class="sync-dot synced" title="Synced"></span>
+    </div>
+    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="main-content">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          <i class="fas fa-{% if category == 'success' %}check-circle{% elif category == 'error' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
+          {{ message }}
+          <button class="alert-close" onclick="this.parentElement.remove()">×</button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <p><i class="fas fa-heart" style="color:#e63946"></i> {{ t.footer_tagline }}</p>
+    <p class="footer-version">v1.0.0 · Offline-First · CPU-Compatible · AGPLv3</p>
+  </div>
+</footer>
+
+<script src="/static/js/app.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
